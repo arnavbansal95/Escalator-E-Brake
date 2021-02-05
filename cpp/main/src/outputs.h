@@ -9,8 +9,13 @@
 #define OUT_ENCODER_B   12          //  OUTPUT ENCODER_PIN B (White)
 
 // Relay Outputs
-#define OUTPUT_RLY1     23          //  Spare 1 Relay 
+#define OUTPUT_BRK1     23          //  Brake 1 Relay 
 #define OUTPUT_RLY2     25          //  Spare 2 Relay
+typedef enum
+{
+    ON,
+    OFF
+} relay_status_t;
 
 void InitOutputs(void);             //  Initialize Outputs
 void ReplicateInputSignal(void);    //  Replicates Input Signal from Input Encoder to Output Encoder Pins
