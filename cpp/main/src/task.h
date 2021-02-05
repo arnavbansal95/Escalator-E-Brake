@@ -1,5 +1,6 @@
 #include "TaskSchedulerDeclarations.h"
 #include "comms.h"
+#include "inputs.h"
 
 #ifndef TASK_H_
 #define TASK_H_

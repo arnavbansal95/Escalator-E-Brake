@@ -9,6 +9,7 @@ void setup()
 {
   // put your setup code here, to run once:
   InitComms();
+  InitInputs();
   Serial.println("===============================");
   Serial.println("    Escalator E-Brake V1.0     ");
   Serial.println("     System:   Initialized     ");
