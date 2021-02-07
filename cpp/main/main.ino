@@ -11,6 +11,7 @@ void setup()
   InitComms();
   InitInputs();
   InitOutputs();
+  InitLCD();
   Serial.println("===============================");
   Serial.println("    Escalator E-Brake V1.0     ");
   Serial.println("     System:   Initialized     ");
