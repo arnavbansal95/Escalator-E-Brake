@@ -47,17 +47,17 @@ float ReadRPM(motor_direction_t* dir)
     sum = (lastEncoded << 2) | encoded;                                 //adding it to the previous encoded value
     if((sum != 0b0000) && (sum != 0b1111) && (sum != 0b0101) && (sum != 0b1010))
     {
-        if((sum == 0b1101) || (sum == 0b0100) || (sum == 0b0010) || (sum == 0b1011))
+        /*if((sum == 0b1101) || (sum == 0b0100) || (sum == 0b0010) || (sum == 0b1011))
             encoderValue ++;
         if((sum == 0b1110) || (sum == 0b0111) || (sum == 0b0001) || (sum == 0b1000))
-            encoderValue --;
+            encoderValue --;*/
+        encoderValue++;
+        Serial.println(encoderValue);
     }
     lastEncoded = encoded;                                                  //store this value for next time
-    Serial.println(sum, BIN);
-
+    
     /*currTime = millis();
     if((currTime - prevTime) > 1000)
-    {
         long diff = EncoderDataDecoder((encoderValue - prevEncoderValue), &dir_var);
         Serial.println(diff);
         rpm = ((float)diff / (float)1024) * 60;
