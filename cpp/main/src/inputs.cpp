@@ -56,8 +56,8 @@ float ReadRPM(motor_direction_t* dir)
     if(lastEncoded != encoded)
     {
         encoderValue++;
+        lastEncoded = encoded;                                                  //store this value for next time
     }
-    lastEncoded = encoded;                                                  //store this value for next time
     
     currTime = millis();
     if((currTime - prevTime) > 1000)
