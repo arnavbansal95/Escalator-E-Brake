@@ -54,6 +54,7 @@ float ReadRPM(motor_direction_t* dir)
     if((currTime - prevTime) > 1000)
     {
         float diff = EncoderDataDecoder((encoderValue - prevEncoderValue), &dir_var);
+        Serial.println(diff);
         rpm = (diff / (float)1024) * 60;
         prevEncoderValue = encoderValue;
         prevTime = currTime;

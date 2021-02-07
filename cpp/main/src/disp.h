@@ -15,7 +15,6 @@ static U8GLIB_ST7920_128X64_1X u8g(GR_LCD_E, GR_LCD_RW, GR_LCD_RS);
 void RPMWrite(float rpm_var);                       //  Generates RPM print string and Writes it on Screen 
 void CMDWrite(motor_direction_t dir);               //  Generates CMD print string and Writes it on Screen  
 
-
 void InitLCD(void);                                 //  Initialize LCD
 void Display(void);                                 //  Main Display Function 
 void BasicFrame(void);                              //  Line Frame
