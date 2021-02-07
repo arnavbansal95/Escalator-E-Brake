@@ -56,14 +56,14 @@ float ReadRPM(motor_direction_t* dir)
     }
     lastEncoded = encoded;                                                  //store this value for next time
     
-    /*currTime = millis();
+    currTime = millis();
     if((currTime - prevTime) > 1000)
         long diff = EncoderDataDecoder((encoderValue - prevEncoderValue), &dir_var);
         Serial.println(diff);
         rpm = ((float)diff / (float)1024) * 60;
         prevEncoderValue = encoderValue;
         prevTime = currTime;
-    }*/
+    }
     *dir = dir_var;
     return(rpm);
 }
