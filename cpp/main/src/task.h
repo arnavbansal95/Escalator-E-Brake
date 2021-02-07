@@ -11,7 +11,6 @@
 void EncoderOut(void);          // Replicates the Encoder Input Pulse Signal
 
 static Scheduler runner;
-static Task CriticalEncoderOut(1, TASK_FOREVER, &EncoderOut, &runner, true);
 static Task DisplayTask(5, TASK_FOREVER, &Display, &runner, true);
 
 #endif

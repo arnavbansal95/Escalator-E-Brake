@@ -13,9 +13,3 @@ void InitOutputs(void)
         digitalWrite(i, LOW);
     }
 }
-
-void ReplicateInputSignal(void)
-{
-    digitalWrite(OUT_ENCODER_A, !ReadInput(ENCODER_A));
-    digitalWrite(OUT_ENCODER_B, !ReadInput(ENCODER_B));
-}

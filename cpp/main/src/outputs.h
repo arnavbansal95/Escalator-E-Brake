@@ -18,6 +18,5 @@ typedef enum
 } relay_status_t;
 
 void InitOutputs(void);             //  Initialize Outputs
-void ReplicateInputSignal(void);    //  Replicates Input Signal from Input Encoder to Output Encoder Pins
 
 #endif
