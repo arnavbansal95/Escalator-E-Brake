@@ -33,7 +33,7 @@ float ReadRPM(motor_direction_t* dir)
     static volatile long encoderValue = 0;
     static volatile long prevEncoderValue = 0;
     static unsigned long prevTime = 0;
-    static unsigned long currTime = 0;
+    static unsigned long diffTime = 0;
     static int MSB;
     static int LSB;
     static int encoded;
@@ -53,7 +53,9 @@ float ReadRPM(motor_direction_t* dir)
             LSB = ReadInput(ENCODER_B);                                                     //LSB = least significant bit
             encoded = (MSB << 1) | LSB;
         }
-        Serial.println(micros() - prevTime);
+        diffTime = micros() - prevTime;
+        float rpm = (float)(4*1000*60) / (float)(1024 * diffTime);
+        Serial.println(rpm);
     }
 
     *dir = dir_var;
