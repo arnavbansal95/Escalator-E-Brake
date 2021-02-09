@@ -44,8 +44,13 @@ float ReadRPM(motor_direction_t* dir)
     MSB = ReadInput(ENCODER_A);                                                     //MSB = most significant bit
     LSB = ReadInput(ENCODER_B);                                                     //LSB = least significant bit
     encoded = (MSB << 1) | LSB;                                                     //converting the 2 pin value to single number
-    sum = (lastEncoded << 2) | encoded;                                           //adding it to the previous encoded value
-    Serial.println(sum);
+    if(encoded == 0b00)
+    {
+        prevTime = millis();
+        while(encoded!=0b10);
+        Serial.println(millis() - prevTime);
+    }
+
     *dir = dir_var;
     return(rpm);
 }
