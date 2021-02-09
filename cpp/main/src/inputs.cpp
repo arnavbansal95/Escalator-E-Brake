@@ -48,7 +48,11 @@ float ReadRPM(motor_direction_t* dir)
     {
         prevTime = millis();
         while(encoded!=0b10)
+        {
+            MSB = ReadInput(ENCODER_A);                                                     //MSB = most significant bit
+            LSB = ReadInput(ENCODER_B);                                                     //LSB = least significant bit
             encoded = (MSB << 1) | LSB;
+        }
         Serial.println(millis() - prevTime);
     }
 
