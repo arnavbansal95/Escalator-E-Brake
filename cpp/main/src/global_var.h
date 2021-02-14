@@ -8,8 +8,8 @@ typedef enum
     STOP
 } motor_direction_t;
 
-void setGlobalRPM(float *rpm_var);
-void setGlobalDir(motor_direction_t *dir_var);
+void setGlobalRPM(float *rpm_var);                  //  Set Global RPM Variable
+void setGlobalDir(motor_direction_t *dir_var);      //  Set Global Direction Variable
 
 float retGlobalRPM(void);
 motor_direction_t retGlobalDir(void);

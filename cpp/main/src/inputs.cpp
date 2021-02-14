@@ -1,11 +1,17 @@
 #include "inputs.h"
 
+static long temp, counter = 0, secCounter = 0;
+static unsigned long prevTime = 0, diffTime = 0;
+static float rawRPM = 1; 
+static uint8_t rpmReadyFlag = 0;
+
 void InitInputs(void)
 {
     pinMode(ENCODER_A, INPUT);
     pinMode(ENCODER_B, INPUT);
     attachInterrupt(0, IntRout0, RISING);
     attachInterrupt(1, IntRout1, RISING);
+    prevTime = micros();
 }
 
 uint8_t ReadInput(int Input)
@@ -31,15 +37,15 @@ uint8_t ReadInput(int Input)
 
 void CalcRPM(void)
 {
-    static int randNum;
     static float rpmArr[ARR_SIZE], rpm;
     for(int i=0;i<ARR_SIZE;i++)
     {
-        randNum = random(1450, 1650);
-        rpmArr[i] = (float)randNum / (float)100;
+        if(rpmReadyFlag == 1)
+            rpmArr[i] = rawRPM;
     }
     rpm = filterData(&rpmArr[0]);
     setGlobalRPM(&rpm);
+
 }
 
 float filterData(float *rpm_var)
@@ -127,4 +133,53 @@ int findMode(int *inArr)
         }
     }
     return(mode);
+}
+
+void IntRout0(void)
+{
+    if(ReadInput(ENCODER_B) == LOW)
+        counter++;
+    else
+        counter--;
+}
+
+void IntRout1(void)
+{
+    if(ReadInput(ENCODER_A) == LOW)
+        counter++;
+    else
+        counter--;
+}
+
+void calcRawRPM(void)
+{
+    #ifdef TESTVAR
+        rpmReadyFlag = 0;
+        static int randNum;
+        randNum = random(1450, 1650);
+        delay(100);
+        rawRPM = (float)randNum / (float)100;
+        rpmReadyFlag = 1;
+    #else
+        if(counter == temp)
+        {
+            rpmReadyFlag = 0;
+            prevTime = micros();
+            secCounter++;
+        }
+        if((counter -  temp) == 16)
+        {
+            diffTime = micros() - prevTime;
+            rawRPM = ((float)468750) / ((float)diffTime);
+            rpmReadyFlag = 1;
+            temp = counter;
+            secCounter = 0;
+        }
+        if(secCounter >= 500)
+        {
+            rawRPM = 0;
+            secCounter = 0;
+            rpmReadyFlag = 1;
+        }
+    #endif
 }
