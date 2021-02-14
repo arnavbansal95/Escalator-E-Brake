@@ -9,6 +9,7 @@
 
 
 static Scheduler runner;
+static Task RPMCalcTask(1, TASK_FOREVER, &CalcRPM, &runner, true);
 static Task DisplayTask(5, TASK_FOREVER, &Display, &runner, true);
 
 #endif

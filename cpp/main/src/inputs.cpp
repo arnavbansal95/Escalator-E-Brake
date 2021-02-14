@@ -26,3 +26,12 @@ uint8_t ReadInput(int Input)
     } 
     return ret;
 }
+
+void CalcRPM(void)
+{
+    static int randNum;
+    static float rpm;
+    randNum = random(1400, 1700);
+    rpm = (float)randNum / (float)100;
+    setGlobalRPM(&rpm);
+}

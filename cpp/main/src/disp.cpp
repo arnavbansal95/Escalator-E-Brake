@@ -29,16 +29,12 @@ void BasicFrame(void)
 
 void ReportingScreen(void)
 {
-    static motor_direction_t dir_screen;
-    static float rpm_screen;
-    rpm_screen = 10.56;
-    dir_screen = FWD;
     BasicFrame();
     u8g.setFont(u8g_font_helvB08);
     u8g.drawStr(8, 14, "Escalator E-Brake 1.0");
     u8g.setFont(u8g_font_helvB08);
-    RPMWrite(rpm_screen);
-    CMDWrite(dir_screen);
+    RPMWrite(retGlobalRPM());
+    CMDWrite(retGlobalDir());
     u8g.drawStr(9, 57, "BRK: OFF");
     u8g.setFont(u8g_font_helvB24);
     u8g.drawStr(99, 53, "!");
@@ -69,16 +65,16 @@ void RPMWrite(float rpm_var)
     free(rtn_ch);
 }
 
-void CMDWrite(motor_direction_t dir)
+void CMDWrite(motor_direction_t dir_var)
 {
     static char **rtn_ch;
     rtn_ch = malloc(sizeof(char*)*11);
     rtn_ch[0] = "CMD: ----";
-    if(dir == FWD)
+    if(dir_var == FWD)
         rtn_ch[0] = "CMD: FWD";
-    if(dir == REV)
+    if(dir_var == REV)
         rtn_ch[0] = "CMD: REV";
-    if(dir == STOP)
+    if(dir_var == STOP)
         rtn_ch[0] = "CMD: STOP";    
     u8g.drawStr(6, 45, ("%s", rtn_ch[0]));
     free(rtn_ch);
