@@ -17,7 +17,5 @@ typedef enum
 
 void InitInputs(void);                                                  //  Initialize Inputs
 uint8_t ReadInput(int Input);                                           //  Read Inputs
-float ReadRPM(motor_direction_t* dir);                                  //  Returns the calculated RPM value from Input Encoder and pass Direction
-long EncoderDataDecoder(long encodedVal, motor_direction_t* dir);       //  Returns the info derived from encoder data
 
 #endif

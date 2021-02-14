@@ -31,7 +31,8 @@ void ReportingScreen(void)
 {
     static motor_direction_t dir_screen;
     static float rpm_screen;
-    rpm_screen = ReadRPM(&dir_screen);
+    rpm_screen = 10.56;
+    dir_screen = FWD;
     BasicFrame();
     u8g.setFont(u8g_font_helvB08);
     u8g.drawStr(8, 14, "Escalator E-Brake 1.0");
