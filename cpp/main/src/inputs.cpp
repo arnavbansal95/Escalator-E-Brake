@@ -42,6 +42,7 @@ void CalcRPM(void)
     {
         if(rpmReadyFlag == 1)
             rpmArr[i] = rawRPM;
+        while(rpmReadyFlag == 0);
     }
     rpm = filterData(&rpmArr[0]);
     setGlobalRPM(&rpm);
@@ -157,7 +158,7 @@ void calcRawRPM(void)
         rpmReadyFlag = 0;
         static int randNum;
         randNum = random(1450, 1650);
-        delay(100);
+        delay(1000);
         rawRPM = (float)randNum / (float)100;
         rpmReadyFlag = 1;
     #else
