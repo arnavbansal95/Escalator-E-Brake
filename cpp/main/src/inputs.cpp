@@ -42,7 +42,6 @@ void CalcRPM(void)
     {
         if(rpmReadyFlag == 1)
             rpmArr[i] = rawRPM;
-        while(rpmReadyFlag == 0);
     }
     rpm = filterData(&rpmArr[0]);
     setGlobalRPM(&rpm);
